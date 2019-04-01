@@ -7,7 +7,7 @@ object MovieRecommenderSystem {
     val (sparkSess, sparkCon, movieDataPath, ratingDataPath) = Utils.initializeSystem()
     // Get the required DataFrames from the corresponding csv files
     val moviesDf = Utils.returnDataFrameFromCSV(sparkSess, movieDataPath)
-    val ratingsDf = Utils.ratingsDataFramePreparation(Utils.returnDataFrameFromCSV(sparkSess, ratingDataPath), sparkCon)
+    val ratingsDf = Utils.returnDataFrameFromCSV(sparkSess, ratingDataPath)
     // Prepare the rating DataFrame in order to compute the movie recommendations
     val ratingsDfPrepared = Utils.ratingsDataFramePreparation(ratingsDf, sparkCon, false)
     // Number of movies recommendations for each user
@@ -32,6 +32,7 @@ object MovieRecommenderSystem {
     )
     t1 = System.nanoTime()
     results += "time elapsed: " + ((t1-t0)/Math.pow(10,9)) + "s\n\n"
+    
     t0 = System.nanoTime()
     results +=Utils.displayRecommendations(
       "New Item-based Collaborative Filtering Recommender",
@@ -40,6 +41,7 @@ object MovieRecommenderSystem {
       recommendationsNumber
     )
     t1 = System.nanoTime()
+
     results += "time elapsed: " + ((t1-t0)/Math.pow(10,9)) + "s\n\n"
     t0 = System.nanoTime()
     results +=Utils.displayRecommendations(
@@ -60,8 +62,8 @@ object MovieRecommenderSystem {
     )
     t1 = System.nanoTime()
     results += "time elapsed: " + ((t1-t0)/Math.pow(10,9)) + "s\n\n"
-    t0 = System.nanoTime()
 
+    t0 = System.nanoTime()
     results +=Utils.displayRecommendations(
       "Hybrid Filtering Recommender",
       // weights taken from paper "Recommender system techniques applied to Netflix movie data"
