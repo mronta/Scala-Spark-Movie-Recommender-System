@@ -29,7 +29,6 @@ object RandomRecommender {
     val usersAlreadySeenMovies = rdf.select(columnsToSelect.head, columnsToSelect.tail: _*)
       .rdd.map(r => (r(0).toString.toInt, r(1).toString.toInt)).groupByKey()
     // Compute not yet seen movies RDD
-    // NON PUO' RIMANERE PARALLELIZZATA PERCHE' TRASFORMAZIONI NON POSSONO AVVENIRE DENTRO ALTRE (?)
     val movies = moviesAndTitles.map(_._1).collect()
     val usersNotYetSeenMovies = usersAlreadySeenMovies.map(
       t => (t._1, movies.filter(movie => !t._2.exists(alreadySeenMovie => alreadySeenMovie == movie)))

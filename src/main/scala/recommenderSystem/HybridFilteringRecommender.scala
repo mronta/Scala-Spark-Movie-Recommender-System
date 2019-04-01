@@ -38,7 +38,7 @@ object HybridFilteringRecommender {
     val moviesRecommendations = computeHybridScore(itemBasedCFResults, contentBasedResults, itemBasedWeight, contentBasedWeight)
         .map(t => {
           val user = t._1
-          var moviePredictedRatings = t._2.sortWith(_._2 > _._2)
+          val moviePredictedRatings = t._2.sortWith(_._2 > _._2)
           (user, moviePredictedRatings)
         })
     moviesRecommendations

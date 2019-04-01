@@ -86,7 +86,7 @@ object ItemBasedCFRecommender {
     val moviesRecommendations = usersNotYetSeenMovies.map(
       t => {
         val user = t._1
-        var moviePredictedRatings = t._2.map(
+        val moviePredictedRatings = t._2.map(
           // For each not yet seen movie return the title and the predicted rating
           movie => (
             moviesMap(movie),
@@ -158,7 +158,7 @@ object ItemBasedCFRecommender {
     val moviesRecommendations = usersNotYetSeenMoviesAndSimilarity.map(
       t => {
         val user = t._1
-        var moviePredictedRatings = t._2.map(
+        val moviePredictedRatings = t._2.map(
           // For each not yet seen movie return the title and the predicted rating
           movie => (
             moviesMap(movie),
